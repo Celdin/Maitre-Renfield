@@ -46,7 +46,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>MaitreRenfield</mainClass>
+                            <mainClass>com.sylvain.jdr.MaitreRenfield</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
