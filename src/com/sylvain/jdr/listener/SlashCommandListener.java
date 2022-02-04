@@ -1,5 +1,7 @@
 package com.sylvain.jdr.listener;
 
+import com.sylvain.jdr.action.impl.ReplyAction;
+import com.sylvain.jdr.action.impl.TransferAction;
 import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.SlashCommand;
 import net.dv8tion.jda.api.entities.User;
@@ -32,15 +34,39 @@ public class SlashCommandListener extends ListenerAdapter {
 		if(motifOptionMapping != null)
 			motif = motifOptionMapping.getAsString();
 
-		if (SlashCommand.TRANSFER.getName().equals(event.getName())) {
-			say(event, String.format("Donner %d de %s a %s", montant, compte, destinataire.getName()));
-		} else {
-			say(event, "Vous avez fait la commande " + event.getName());
+		switch (SlashCommand.valueOf(event.getName())) {
+		case TRANSFER:
+			TransferAction.builder()
+					.event(event)
+					.compte(compte)
+					.destinataire(destinataire)
+					.montant(montant)
+					.build()
+					.apply();
+			break;
+		case CHECK:
+			break;
+		case PAY:
+			break;
+		case ADD:
+			break;
+		case SUB:
+			break;
+		case STEAL:
+			break;
+		case HACK:
+			break;
+		case INCOME:
+			break;
+		case ADMINCHECK:
+			break;
+		default:
+			ReplyAction.builder()
+					.event(event)
+					.message("Pas d'action")
+					.build()
+					.apply();
+			break;
 		}
-	}
-
-	public void say (SlashCommandInteractionEvent event, String content)
-	{
-		event.reply(content).queue(); // This requires no permissions!
 	}
 }

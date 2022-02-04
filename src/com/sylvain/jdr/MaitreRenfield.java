@@ -2,6 +2,7 @@ package com.sylvain.jdr;
 
 import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.SlashCommand;
+import com.sylvain.jdr.driver.PostgreSQLDriver;
 import com.sylvain.jdr.listener.SlashCommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -11,14 +12,22 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
+import java.sql.SQLException;
 import java.util.EnumSet;
 
 public class MaitreRenfield {
 
-	public static void main(String[] args) throws LoginException {
+	public static void main(String[] args) throws LoginException, SQLException {
 		JDA jda = JDABuilder.createLight(args[0], EnumSet.noneOf(GatewayIntent.class)) // slash commands don't need any intents
 			.addEventListeners(new SlashCommandListener())
 			.build();
+		if(args.length > 1 ) {
+			PostgreSQLDriver.initialise(args[1], args[2], args[3]);
+			PostgreSQLDriver.ckeckDatabase();
+		} else {
+			PostgreSQLDriver.initialise(null, null, null);
+			PostgreSQLDriver.ckeckDatabase();
+		}
 		jda.updateCommands()
 				.addCommands(Commands.slash(SlashCommand.TRANSFER.getName(), "Transfère de l'argent à un autre joueur.")
 						.addOptions(new OptionData(OptionType.STRING, "compte", "Compte à utiliser")
