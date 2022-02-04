@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import static java.lang.String.format;
 
@@ -42,7 +43,9 @@ public class PostgreSQLDriver {
 			connection = DriverManager.getConnection("jdbc:postgresql://" + url + "?sslmode=require", user, password);
 		} else {
 			String dbUrl = System.getenv("JDBC_DATABASE_URL");
-			connection = DriverManager.getConnection(dbUrl);
+			Properties appProps = new Properties();
+			appProps.setProperty("ssl", "true");
+			connection = DriverManager.getConnection(dbUrl, appProps);
 		}
 		System.out.println("PostgreSQLDriver.connect");
 	}

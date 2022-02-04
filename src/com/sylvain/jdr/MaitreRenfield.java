@@ -21,8 +21,6 @@ import java.util.Properties;
 public class MaitreRenfield {
 
 	public static void main(String[] args) throws LoginException, SQLException, IOException {
-		Properties appProps = new Properties();
-		appProps.setProperty("ssl", "true");
 		JDA jda = JDABuilder.createLight(System.getenv("DISCORD_TOKEN"), EnumSet.noneOf(GatewayIntent.class)) // slash commands don't need any intents
 			.addEventListeners(new SlashCommandListener())
 			.build();
