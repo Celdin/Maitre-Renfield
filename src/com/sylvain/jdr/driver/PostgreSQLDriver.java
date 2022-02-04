@@ -44,7 +44,7 @@ public class PostgreSQLDriver {
 		} else {
 			String dbUrl = System.getenv("JDBC_DATABASE_URL");
 			Properties appProps = new Properties();
-			appProps.setProperty("sslmode", "require");
+			appProps.setProperty("ssl", "true");
 			connection = DriverManager.getConnection(dbUrl, appProps);
 		}
 		System.out.println("PostgreSQLDriver.connect");
