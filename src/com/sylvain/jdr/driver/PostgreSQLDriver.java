@@ -5,6 +5,7 @@ import com.sylvain.jdr.data.dto.impl.Player;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -15,7 +16,7 @@ public class PostgreSQLDriver {
 	private static String url;
 	private static String user;
 	private static String password;
-	private static final List<DataObject> tables = List.of(new Player());
+	private static final List<DataObject> tables = Arrays.asList(new Player());
 
 	public static void initialise(String url, String user, String password) {
 		PostgreSQLDriver.url = url;

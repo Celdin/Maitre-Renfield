@@ -4,6 +4,7 @@ import com.sylvain.jdr.data.dto.DataObject;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +71,7 @@ public class Player extends DataObject {
 	@Override
 	public List<String> getColumnNames() {
 		final List<String> columnNames = super.getColumnNames();
-		columnNames.addAll(List.of(COLUMN_UID, COLUMN_BANK, COLUMN_INVENTORY, COLUMN_INCOME));
+		columnNames.addAll(Arrays.asList(COLUMN_UID, COLUMN_BANK, COLUMN_INVENTORY, COLUMN_INCOME));
 		return columnNames;
 	}
 
