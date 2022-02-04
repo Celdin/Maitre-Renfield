@@ -1,1 +1,1 @@
-worker: java -jar target/MaitreRenfield-1.0-SNAPSHOT.jar
+worker: java -jar -Djavax.net.ssl.trustStore=.jdk-overlay/jre/lib/security/cacerts target/MaitreRenfield-1.0-SNAPSHOT.jar
