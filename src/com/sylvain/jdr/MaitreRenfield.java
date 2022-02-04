@@ -18,16 +18,11 @@ import java.util.EnumSet;
 public class MaitreRenfield {
 
 	public static void main(String[] args) throws LoginException, SQLException {
-		JDA jda = JDABuilder.createLight(args[0], EnumSet.noneOf(GatewayIntent.class)) // slash commands don't need any intents
+		JDA jda = JDABuilder.createLight(System.getenv("DISCORD_TOKEN"), EnumSet.noneOf(GatewayIntent.class)) // slash commands don't need any intents
 			.addEventListeners(new SlashCommandListener())
 			.build();
-		if(args.length > 1 ) {
-			PostgreSQLDriver.initialise(args[1], args[2], args[3]);
-			PostgreSQLDriver.ckeckDatabase();
-		} else {
-			PostgreSQLDriver.initialise(null, null, null);
-			PostgreSQLDriver.ckeckDatabase();
-		}
+		PostgreSQLDriver.initialise(null, null, null);
+		PostgreSQLDriver.ckeckDatabase();
 		jda.updateCommands()
 				.addCommands(Commands.slash(SlashCommand.TRANSFER.getName(), "Transfère de l'argent à un autre joueur.")
 						.addOptions(new OptionData(OptionType.STRING, "compte", "Compte à utiliser")
