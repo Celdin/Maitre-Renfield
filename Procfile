@@ -1,1 +1,1 @@
-worker: java -jar target/MaitreRenfield-1.0-SNAPSHOT.jar OTM4NzcwMzUxOTE4MzEzNDgz.YfvIBQ.TQSxCvumIHgByfXd7Wr0fDUUCv4
+worker: java -jar target/MaitreRenfield-1.0-SNAPSHOT.jar
