@@ -18,7 +18,9 @@ public enum SlashCommand {
 	HACK ("hack"),
 	INCOME ("income"),
 	ADMINCHECK ("admincheck"),
-	LINK ("link");
+	LINK ("link"),
+	DEPOSIT ("deposit"),
+	WITHDRAW ("withdraw");
 
 	@Getter
 	String name;

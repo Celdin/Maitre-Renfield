@@ -92,6 +92,12 @@ public class MaitreRenfield {
 								.setRequired(true))
 						.addOptions(new OptionData(OptionType.CHANNEL, "channel", "Le channel")
 								.setRequired(true)))
+				.addCommands(Commands.slash(SlashCommand.DEPOSIT.getName(), "Effectuer un dépot")
+						.addOptions(new OptionData(OptionType.INTEGER, "montant", "Le montant")
+								.setRequired(true)))
+				.addCommands(Commands.slash(SlashCommand.WITHDRAW.getName(), "Effectuer un retrait")
+						.addOptions(new OptionData(OptionType.INTEGER, "montant", "Le montant")
+								.setRequired(true)))
 				.queue();
 	}
 }

@@ -122,6 +122,20 @@ public class SlashCommandListener extends ListenerAdapter {
 					.build()
 					.apply();
 			break;
+		case DEPOSIT:
+			DepositAction.builder()
+					.event(event)
+					.montant(montant)
+					.build()
+					.apply();
+			break;
+		case WITHDRAW:
+			WithdrawAction.builder()
+					.event(event)
+					.montant(montant)
+					.build()
+					.apply();
+			break;
 		default:
 			ReplyAction.builder()
 					.event(event)
