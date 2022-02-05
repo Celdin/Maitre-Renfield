@@ -87,6 +87,11 @@ public class MaitreRenfield {
 						.addOptions(new OptionData(OptionType.INTEGER, "montant", "Le montant")
 								.setRequired(true)))
 				.addCommands(Commands.slash(SlashCommand.ADMINCHECK.getName(), "Afficher un récapitulatif de l'ensemble des comptes et revenu des joueurs."))
+				.addCommands(Commands.slash(SlashCommand.LINK.getName(), "Lie un joueur à un cannal")
+						.addOptions(new OptionData(OptionType.USER, "destinataire", "Le destinataire")
+								.setRequired(true))
+						.addOptions(new OptionData(OptionType.CHANNEL, "channel", "Le channel")
+								.setRequired(true)))
 				.queue();
 	}
 }

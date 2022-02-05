@@ -4,30 +4,31 @@ import com.sylvain.jdr.action.Action;
 import com.sylvain.jdr.data.dto.impl.Player;
 import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.GuildMessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
-public class MpAction extends Action {
-
+public class LinkAction extends Action {
+	GuildMessageChannel channel;
 	User destinataire;
-	String message;
 
 	@Builder
-	public MpAction(GenericCommandInteractionEvent event, User destinataire, String message) {
+	public LinkAction(GenericCommandInteractionEvent event, User destinataire, GuildMessageChannel channel) {
 		super(event);
 		this.destinataire = destinataire;
-		this.message = message;
+		this.channel = channel;
 	}
 
 	@Override
 	public void apply() {
-
 		PlayerQuery playerQuery = new PlayerQuery();
 		final Player player = playerQuery.getById(destinataire.getId());
-		final TextChannel textChannelById = event.getJDA().getTextChannelById(player.getChannel());
-		if (textChannelById != null)
-			textChannelById.sendMessage(message).queue();
+		player.setChannel(channel.getId());
+		ReplyAction.builder()
+				.event(event)
+				.message(String.format("Joueur %s sur cannal %s", getName(destinataire), channel.getName()))
+				.build()
+				.apply();
 	}
 
 	@Override

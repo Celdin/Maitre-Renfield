@@ -17,6 +17,7 @@ public class PlayerQuery extends Query<Player> {
 		player.setIncomeBank(600L);
 		player.setIncomeInv(550L);
 		player.setUid(id);
+		player.setChannel("939628364224929812");
 		return player;
 	}
 

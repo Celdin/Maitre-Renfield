@@ -3,6 +3,7 @@ package com.sylvain.jdr.listener;
 import com.sylvain.jdr.action.impl.*;
 import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.SlashCommand;
+import net.dv8tion.jda.api.entities.GuildMessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -17,11 +18,13 @@ public class SlashCommandListener extends ListenerAdapter {
 		final OptionMapping destinataireOptionMapping = event.getOption("destinataire");
 		final OptionMapping montantOptionMapping = event.getOption("montant");
 		final OptionMapping motifOptionMapping = event.getOption("motif");
+		final OptionMapping channelOptionMapping = event.getOption("channel");
 		Comptes compte = null;
 		User destinataire = null;
 		User cible = null;
 		Long montant = null;
 		String motif = null;
+		GuildMessageChannel channel = null;
 		if(compteOptionMapping != null)
 			compte = Comptes.valueOf(compteOptionMapping.getAsString());
 		if(cibleOptionMapping != null)
@@ -32,6 +35,8 @@ public class SlashCommandListener extends ListenerAdapter {
 			montant = montantOptionMapping.getAsLong();
 		if(motifOptionMapping != null)
 			motif = motifOptionMapping.getAsString();
+		if(channelOptionMapping != null)
+			channel = channelOptionMapping.getAsMessageChannel();
 
 		switch (SlashCommand.findByName(event.getName())) {
 		case TRANSFER:
@@ -106,6 +111,14 @@ public class SlashCommandListener extends ListenerAdapter {
 		case ADMINCHECK:
 			AdminCheckAction.builder()
 					.event(event)
+					.build()
+					.apply();
+			break;
+		case LINK:
+			LinkAction.builder()
+					.event(event)
+					.destinataire(destinataire)
+					.channel(channel)
 					.build()
 					.apply();
 			break;
