@@ -24,8 +24,8 @@ public class MaitreRenfield {
 		JDA jda = JDABuilder.createLight(System.getenv("DISCORD_TOKEN"), EnumSet.noneOf(GatewayIntent.class)) // slash commands don't need any intents
 			.addEventListeners(new SlashCommandListener())
 			.build();
-		PostgreSQLDriver.initialise(null, null, null);
-		PostgreSQLDriver.ckeckDatabase();
+//		PostgreSQLDriver.initialise(null, null, null);
+//		PostgreSQLDriver.ckeckDatabase();
 		jda.updateCommands()
 				.addCommands(Commands.slash(SlashCommand.TRANSFER.getName(), "Transfère de l'argent à un autre joueur.")
 						.addOptions(new OptionData(OptionType.STRING, "compte", "Compte à utiliser")
