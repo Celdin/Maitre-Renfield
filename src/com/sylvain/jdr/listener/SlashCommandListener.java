@@ -77,8 +77,22 @@ public class SlashCommandListener extends ListenerAdapter {
 					.apply();
 			break;
 		case STEAL:
+			StealAction.builder()
+					.event(event)
+					.destinataire(destinataire)
+					.victime(cible)
+					.montant(montant)
+					.build()
+					.apply();
 			break;
 		case HACK:
+			HackAction.builder()
+					.event(event)
+					.destinataire(destinataire)
+					.victime(cible)
+					.montant(montant)
+					.build()
+					.apply();
 			break;
 		case INCOME:
 			break;
