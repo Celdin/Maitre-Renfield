@@ -27,11 +27,13 @@ public class CheckAction extends Action {
 		embedBuilder.setTitle(String.format(TITRE, getName(event.getUser())));
 		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), source.getInventory() + "€", false);
 		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), source.getBank() + "€", false);
-		final MessageEmbed.Field incomeFIeld = new MessageEmbed.Field("Revenus", source.getIncome() + "€/mois", false);
+		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus", source.getIncomeBank() + "€/mois", false);
+		final MessageEmbed.Field incomeInvFIeld = new MessageEmbed.Field("Revenus", source.getIncomeInv() + "€/mois", false);
 
 		embedBuilder.addField(inventaireField);
 		embedBuilder.addField(banqueField);
-		embedBuilder.addField(incomeFIeld);
+		embedBuilder.addField(incomeBnkFIeld);
+		embedBuilder.addField(incomeInvFIeld);
 
 
 		event.replyEmbeds(embedBuilder.build()).queue();

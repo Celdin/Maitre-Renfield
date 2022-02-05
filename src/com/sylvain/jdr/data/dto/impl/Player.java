@@ -13,17 +13,24 @@ public class Player extends DataObject {
 	String uid;
 	Long bank;
 	Long inventory;
-	Long income;
+	Long incomeBank;
+	Long incomeInv;
+	String channel;
 
 
 	public final static String COLUMN_UID = "UID";
+	public final static String COLUMN_CHANNEL = "CHANNEL";
 	public final static String COLUMN_BANK = "BANK";
 	public final static String COLUMN_INVENTORY = "INVENTORY";
-	public final static String COLUMN_INCOME = "INCOME";
+	public final static String COLUMN_INCOME_BN = "INCOME_BNK";
+	public final static String COLUMN_INCOME_INV = "INCOME_INV";
+
 	public final static String COLUMN_UID_TYPE = "TEXT";
+	public final static String COLUMN_CHANNEL_TYPE = "TEXT";
 	public final static String COLUMN_BANK_TYPE = "BIGINT";
 	public final static String COLUMN_INVENTORY_TYPE = "BIGINT";
-	public final static String COLUMN_INCOME_TYPE = "BIGINT";
+	public final static String COLUMN_INCOME_BN_TYPE = "BIGINT";
+	public final static String COLUMN_INCOME_INV_TYPE = "BIGINT";
 
 	@Override
 	public String getTableName() {
@@ -38,12 +45,16 @@ public class Player extends DataObject {
 		switch (columnName) {
 		case COLUMN_UID:
 			return uid;
+		case COLUMN_CHANNEL:
+			return channel;
 		case COLUMN_BANK:
 			return bank;
 		case COLUMN_INVENTORY:
 			return inventory;
-		case COLUMN_INCOME:
-			return income;
+		case COLUMN_INCOME_BN:
+			return incomeBank;
+		case COLUMN_INCOME_INV:
+			return incomeInv;
 		default:
 			return null;
 		}
@@ -56,14 +67,20 @@ public class Player extends DataObject {
 		case COLUMN_UID:
 			uid = (String) object;
 			break;
+		case COLUMN_CHANNEL:
+			channel = (String) object;
+			break;
 		case COLUMN_BANK:
 			bank = (Long) object;
 			break;
 		case COLUMN_INVENTORY:
 			inventory = (Long) object;
 			break;
-		case COLUMN_INCOME:
-			income = (Long) object;
+		case COLUMN_INCOME_BN:
+			incomeBank = (Long) object;
+			break;
+		case COLUMN_INCOME_INV:
+			incomeInv = (Long) object;
 			break;
 		}
 	}
@@ -71,7 +88,7 @@ public class Player extends DataObject {
 	@Override
 	public List<String> getColumnNames() {
 		final List<String> columnNames = super.getColumnNames();
-		columnNames.addAll(Arrays.asList(COLUMN_UID, COLUMN_BANK, COLUMN_INVENTORY, COLUMN_INCOME));
+		columnNames.addAll(Arrays.asList(COLUMN_UID, COLUMN_CHANNEL, COLUMN_BANK, COLUMN_INVENTORY, COLUMN_INCOME_BN, COLUMN_INCOME_INV));
 		return columnNames;
 	}
 
@@ -79,9 +96,11 @@ public class Player extends DataObject {
 	public Map<String, String> getColumnTypes() {
 		final Map<String, String> columnTypes = super.getColumnTypes();
 		columnTypes.put(COLUMN_UID,COLUMN_UID_TYPE);
+		columnTypes.put(COLUMN_CHANNEL, COLUMN_CHANNEL_TYPE);
 		columnTypes.put(COLUMN_BANK,COLUMN_BANK_TYPE);
 		columnTypes.put(COLUMN_INVENTORY,COLUMN_INVENTORY_TYPE);
-		columnTypes.put(COLUMN_INCOME,COLUMN_INCOME_TYPE);
+		columnTypes.put(COLUMN_INCOME_BN,COLUMN_INCOME_BN_TYPE);
+		columnTypes.put(COLUMN_INCOME_INV,COLUMN_INCOME_INV_TYPE);
 		return columnTypes;
 	}
 

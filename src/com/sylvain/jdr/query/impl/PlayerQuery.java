@@ -14,7 +14,8 @@ public class PlayerQuery extends Query<Player> {
 		final Player player = new Player();
 		player.setBank(1000L);
 		player.setInventory(100L);
-		player.setIncome(500L);
+		player.setIncomeBank(600L);
+		player.setIncomeInv(550L);
 		player.setUid(id);
 		return player;
 	}

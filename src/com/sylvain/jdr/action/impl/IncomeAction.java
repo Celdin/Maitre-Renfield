@@ -30,7 +30,14 @@ public class IncomeAction extends Action {
 		source = playerQuery.getById(event.getUser().getId());
 		if(!validate())
 			return;
-		source.setIncome(montant);
+		switch (comptes) {
+		case BANQUE:
+			source.setIncomeBank(montant);
+			break;
+		case INVENTAIRE:
+			source.setIncomeInv(montant);
+			break;
+		}
 		ReplyAction.builder()
 				.event(event)
 				.message(String.format(MESSAGE_OK, getName(destinataire), montant))
