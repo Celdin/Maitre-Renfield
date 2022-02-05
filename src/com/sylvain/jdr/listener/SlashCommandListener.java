@@ -1,8 +1,6 @@
 package com.sylvain.jdr.listener;
 
-import com.sylvain.jdr.action.impl.CheckAction;
-import com.sylvain.jdr.action.impl.ReplyAction;
-import com.sylvain.jdr.action.impl.TransferAction;
+import com.sylvain.jdr.action.impl.*;
 import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.SlashCommand;
 import net.dv8tion.jda.api.entities.User;
@@ -52,10 +50,31 @@ public class SlashCommandListener extends ListenerAdapter {
 					.apply();
 			break;
 		case PAY:
+			PayAction.builder()
+					.event(event)
+					.compte(compte)
+					.montant(montant)
+					.motif(motif)
+					.build()
+					.apply();
 			break;
 		case ADD:
+			AddAction.builder()
+					.event(event)
+					.compte(compte)
+					.destinataire(destinataire)
+					.montant(montant)
+					.build()
+					.apply();
 			break;
 		case SUB:
+			SubAction.builder()
+					.event(event)
+					.compte(compte)
+					.destinataire(destinataire)
+					.montant(montant)
+					.build()
+					.apply();
 			break;
 		case STEAL:
 			break;
