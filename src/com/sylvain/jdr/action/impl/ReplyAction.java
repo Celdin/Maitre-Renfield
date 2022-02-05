@@ -2,14 +2,16 @@ package com.sylvain.jdr.action.impl;
 
 import com.sylvain.jdr.action.Action;
 import lombok.Builder;
-import lombok.Data;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
-@Data
-@Builder
-public class ReplyAction implements Action {
-	GenericCommandInteractionEvent event;
+public class ReplyAction extends Action {
 	String message;
+
+	@Builder
+	public ReplyAction(GenericCommandInteractionEvent event, String message) {
+		super(event);
+		this.message = message;
+	}
 
 	@Override
 	public void apply() {

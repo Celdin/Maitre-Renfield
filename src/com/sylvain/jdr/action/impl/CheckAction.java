@@ -5,15 +5,11 @@ import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.dto.impl.Player;
 import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
-@Data
-@NoArgsConstructor
-public class CheckAction implements Action {
+public class CheckAction extends Action {
 	private final static String TITRE = "Fonds de %d";
 
 	GenericCommandInteractionEvent event;
@@ -22,7 +18,7 @@ public class CheckAction implements Action {
 
 	@Builder
 	public CheckAction(GenericCommandInteractionEvent event) {
-		this.event = event;
+		super(event);
 	}
 
 	@Override

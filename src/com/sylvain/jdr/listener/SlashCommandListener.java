@@ -1,5 +1,6 @@
 package com.sylvain.jdr.listener;
 
+import com.sylvain.jdr.action.impl.CheckAction;
 import com.sylvain.jdr.action.impl.ReplyAction;
 import com.sylvain.jdr.action.impl.TransferAction;
 import com.sylvain.jdr.data.Comptes;
@@ -34,7 +35,7 @@ public class SlashCommandListener extends ListenerAdapter {
 		if(motifOptionMapping != null)
 			motif = motifOptionMapping.getAsString();
 
-		switch (SlashCommand.valueOf(event.getName())) {
+		switch (SlashCommand.findByName(event.getName())) {
 		case TRANSFER:
 			TransferAction.builder()
 					.event(event)
@@ -45,7 +46,10 @@ public class SlashCommandListener extends ListenerAdapter {
 					.apply();
 			break;
 		case CHECK:
-
+			CheckAction.builder()
+					.event(event)
+					.build()
+					.apply();
 			break;
 		case PAY:
 			break;
