@@ -1,18 +1,18 @@
 package com.sylvain.jdr.action.impl;
 
 import com.sylvain.jdr.action.Action;
-import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.dto.impl.Player;
 import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdminCheckAction extends Action {
+
 	private final static String TITRE = "Fonds de %s";
 
 	@Builder
@@ -24,27 +24,13 @@ public class AdminCheckAction extends Action {
 	public void apply() {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		PlayerQuery playerQuery = new PlayerQuery();
+		ReplyAction.builder().event(event).message("Admin check").build().apply();
 		try {
 			final List<Player> all = playerQuery.getAll();
-			embedBuilder.setTitle("Admin check");
-			for(Player player : all) {
-				final MessageEmbed.Field joueurField = new MessageEmbed.Field("Joueur", getName(player.getUid()), true);
-				final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), player.getInventory() + "€", true);
-				final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), player.getBank() + "€", true);
-				final MessageEmbed.Field incomeFIeldInv = new MessageEmbed.Field("Revenus[" + Comptes.INVENTAIRE.name() + "]", player.getIncomeInv() + "€/mois", true);
-				final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", true);
-
-				embedBuilder.addField(joueurField);
-				embedBuilder.addField(inventaireField);
-				embedBuilder.addField(banqueField);
-				embedBuilder.addField(incomeFIeldInv);
-				embedBuilder.addField(incomeBnkFIeld);
-				embedBuilder.addBlankField(false);
-			}
+			event.getMessageChannel().sendMessageEmbeds(all.stream().map(player -> CheckAction.builder().event(event).build().getEmbedBuilder(player)).collect(Collectors.toList())).queue();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		event.replyEmbeds(embedBuilder.build()).queue();
 	}
 
 	@Override

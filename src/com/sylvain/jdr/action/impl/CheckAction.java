@@ -8,6 +8,7 @@ import lombok.Builder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class CheckAction extends Action {
 	private final static String TITRE = "Fonds de %s";
@@ -21,22 +22,27 @@ public class CheckAction extends Action {
 
 	@Override
 	public void apply() {
-		EmbedBuilder embedBuilder = new EmbedBuilder();
 		PlayerQuery playerQuery = new PlayerQuery();
 		source = playerQuery.getById(event.getUser().getId());
-		embedBuilder.setTitle(String.format(TITRE, getName(event.getUser())));
-		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), source.getBank() + "€", false);
-		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), source.getInventory() + "€", false);
-		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", source.getIncomeBank() + "€/mois", false);
-		final MessageEmbed.Field incomeInvFIeld = new MessageEmbed.Field("Revenus[" + Comptes.INVENTAIRE.name() + "]", source.getIncomeInv() + "€/mois", false);
+		MessageEmbed embed = getEmbedBuilder(source);
+
+		event.replyEmbeds(embed).queue();
+	}
+
+	@NotNull
+	public MessageEmbed getEmbedBuilder(Player player) {
+		EmbedBuilder embedBuilder = new EmbedBuilder();
+		embedBuilder.setTitle(String.format(TITRE, getName(player.getUid())));
+		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), player.getBank() + "€", false);
+		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), player.getInventory() + "€", false);
+		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", false);
+		final MessageEmbed.Field incomeInvFIeld = new MessageEmbed.Field("Revenus[" + Comptes.INVENTAIRE.name() + "]", player.getIncomeInv() + "€/mois", false);
 
 		embedBuilder.addField(inventaireField);
 		embedBuilder.addField(banqueField);
 		embedBuilder.addField(incomeBnkFIeld);
 		embedBuilder.addField(incomeInvFIeld);
-
-
-		event.replyEmbeds(embedBuilder.build()).queue();
+		return embedBuilder.build();
 	}
 
 	@Override
