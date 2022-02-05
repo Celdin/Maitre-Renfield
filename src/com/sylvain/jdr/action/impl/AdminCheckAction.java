@@ -22,12 +22,10 @@ public class AdminCheckAction extends Action {
 
 	@Override
 	public void apply() {
-		EmbedBuilder embedBuilder = new EmbedBuilder();
 		PlayerQuery playerQuery = new PlayerQuery();
-		ReplyAction.builder().event(event).message("Admin check").build().apply();
 		try {
 			final List<Player> all = playerQuery.getAll();
-			event.getMessageChannel().sendMessageEmbeds(all.stream().map(player -> CheckAction.builder().event(event).build().getEmbedBuilder(player)).collect(Collectors.toList())).queue();
+			event.replyEmbeds(all.stream().map(player -> CheckAction.builder().event(event).build().getEmbedBuilder(player)).collect(Collectors.toList())).queue();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
