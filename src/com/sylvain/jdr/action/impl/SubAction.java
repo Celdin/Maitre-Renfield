@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionE
 
 public class SubAction extends Action {
 	private final static String MESSAGE_OK = "Vous retirez %s€[%s] à %s.";
+	private final static String PRIVATE_MESSAGE_OK = "Vous perdez %s€[%s].";
 	private final static String MESSAGE_MONTANT_NEG = "Indiquer un montant suppérieur à zero.";
 
 	Comptes compte = null;
@@ -40,6 +41,12 @@ public class SubAction extends Action {
 			source.setInventory(source.getInventory() - montant );
 			break;
 		}
+		MpAction.builder()
+				.event(event)
+				.destinataire(destinataire)
+				.message(String.format(PRIVATE_MESSAGE_OK, montant, compte))
+				.build()
+				.apply();
 		ReplyAction.builder()
 				.event(event)
 				.message(String.format(MESSAGE_OK, montant, compte, getName(destinataire)))
