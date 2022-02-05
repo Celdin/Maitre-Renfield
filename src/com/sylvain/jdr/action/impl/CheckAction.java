@@ -10,9 +10,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
 public class CheckAction extends Action {
-	private final static String TITRE = "Fonds de %d";
-
-	GenericCommandInteractionEvent event;
+	private final static String TITRE = "Fonds de %s";
 
 	Player source;
 
@@ -25,8 +23,8 @@ public class CheckAction extends Action {
 	public void apply() {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		PlayerQuery playerQuery = new PlayerQuery();
-		source = playerQuery.getById(event.getMember().getId());
-		embedBuilder.setTitle(String.format(TITRE, event.getMember().getNickname()));
+		source = playerQuery.getById(event.getUser().getId());
+		embedBuilder.setTitle(String.format(TITRE, getName(event.getUser())));
 		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), source.getInventory() + "€", false);
 		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), source.getBank() + "€", false);
 		final MessageEmbed.Field incomeFIeld = new MessageEmbed.Field("Revenus", source.getIncome() + "€/mois", false);

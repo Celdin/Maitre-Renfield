@@ -5,54 +5,51 @@ import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.dto.impl.Player;
 import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
-public class TransferAction extends Action {
-	private final static String MESSAGE_OK = "Vous transferer %s€[%s] à %s";
+public class PayAction extends Action {
+	private final static String MESSAGE_OK = "Vous payez %s€[%s]";
 	private final static String MESSAGE_MONTANT_NEG = "Indiquer un montant suppérieur à zero.";
 	private final static String MESSAGE_ISSUFISANT_BANQUE = "Vous avez pas suffisament de fond sur votre compte en baque.";
 	private final static String MESSAGE_ISSUFISANT_INV = "Vous avez pas suffisament de fond dans votre inventaire.";
 
+
 	Comptes compte = null;
-	User destinataire = null;
 	Long montant = null;
-	
+	String motif = null;
+
 	Player source;
-	Player cible;
-
-
 
 	@Builder
-	public TransferAction(GenericCommandInteractionEvent event, Comptes compte, User destinataire, Long montant) {
+	public PayAction(GenericCommandInteractionEvent event, Comptes compte, Long montant, String motif) {
 		super(event);
 		this.compte = compte;
-		this.destinataire = destinataire;
 		this.montant = montant;
+		this.motif = motif;
 	}
 
 	@Override
 	public void apply() {
 		PlayerQuery playerQuery = new PlayerQuery();
 		source = playerQuery.getById(event.getUser().getId());
-		cible = playerQuery.getById(destinataire.getId());
 		if(!validate())
 			return;
 		switch (compte) {
 		case BANQUE:
 			source.setBank(source.getBank() - montant );
-			cible.setBank(cible.getBank() + montant );
 			break;
 		case INVENTAIRE:
 			source.setInventory(source.getInventory() - montant );
-			cible.setInventory(cible.getInventory() + montant );
 			break;
 		}
+		String format = String.format(MESSAGE_OK, montant, compte);
+		format = motif!=null?format + " (" + motif + ").":format + ".";
 		ReplyAction.builder()
 				.event(event)
-				.message(String.format(MESSAGE_OK, montant, compte, getName(destinataire)))
+				.message(format)
 				.build()
 				.apply();
+
 	}
 
 	@Override
