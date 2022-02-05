@@ -45,6 +45,7 @@ public class SlashCommandListener extends ListenerAdapter {
 					.apply();
 			break;
 		case CHECK:
+
 			break;
 		case PAY:
 			break;
