@@ -25,10 +25,10 @@ public class CheckAction extends Action {
 		PlayerQuery playerQuery = new PlayerQuery();
 		source = playerQuery.getById(event.getUser().getId());
 		embedBuilder.setTitle(String.format(TITRE, getName(event.getUser())));
-		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), source.getInventory() + "€", false);
 		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), source.getBank() + "€", false);
-		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus", source.getIncomeBank() + "€/mois", false);
-		final MessageEmbed.Field incomeInvFIeld = new MessageEmbed.Field("Revenus", source.getIncomeInv() + "€/mois", false);
+		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), source.getInventory() + "€", false);
+		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", source.getIncomeBank() + "€/mois", false);
+		final MessageEmbed.Field incomeInvFIeld = new MessageEmbed.Field("Revenus[" + Comptes.INVENTAIRE.name() + "]", source.getIncomeInv() + "€/mois", false);
 
 		embedBuilder.addField(inventaireField);
 		embedBuilder.addField(banqueField);

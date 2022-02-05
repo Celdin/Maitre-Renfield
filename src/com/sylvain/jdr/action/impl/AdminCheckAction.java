@@ -30,8 +30,8 @@ public class AdminCheckAction extends Action {
 			for(Player player : all) {
 				final MessageEmbed.Field joueurField = new MessageEmbed.Field("Joueur", getName(player.getUid()), false);
 				final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), player.getInventory() + "€", true);
-				final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), player.getBank() + "€", true);
-				final MessageEmbed.Field incomeFIeldInv = new MessageEmbed.Field("Revenus[" + Comptes.INVENTAIRE.name() + "]", player.getIncomeInv() + "€/mois", false);
+				final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), player.getBank() + "€", false);
+				final MessageEmbed.Field incomeFIeldInv = new MessageEmbed.Field("Revenus[" + Comptes.INVENTAIRE.name() + "]", player.getIncomeInv() + "€/mois", true);
 				final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", true);
 
 				embedBuilder.addField(joueurField);
