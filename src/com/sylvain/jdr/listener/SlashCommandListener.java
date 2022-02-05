@@ -95,8 +95,19 @@ public class SlashCommandListener extends ListenerAdapter {
 					.apply();
 			break;
 		case INCOME:
+			IncomeAction.builder()
+					.event(event)
+					.comptes(compte)
+					.destinataire(destinataire)
+					.montant(montant)
+					.build()
+					.apply();
 			break;
 		case ADMINCHECK:
+			AdminCheckAction.builder()
+					.event(event)
+					.build()
+					.apply();
 			break;
 		default:
 			ReplyAction.builder()

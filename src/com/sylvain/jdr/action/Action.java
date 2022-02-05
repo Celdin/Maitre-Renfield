@@ -10,6 +10,14 @@ public abstract class Action {
 	protected GenericCommandInteractionEvent event;
 	public abstract void apply();
 	public abstract boolean validate();
+
+	protected String getName(String id) {
+		final User userById = event.getJDA().retrieveUserById(id).complete();
+		if(userById!= null)
+			return getName(userById);
+		return id;
+	}
+
 	protected String getName(User user) {
 		String name = user.getName();
 		final Guild guild = event.getGuild();
