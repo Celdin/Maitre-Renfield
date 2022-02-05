@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Data
 public class Player extends DataObject {
-	Long uid;
+	String uid;
 	Long bank;
 	Long inventory;
 	Long income;
@@ -20,7 +20,7 @@ public class Player extends DataObject {
 	public final static String COLUMN_BANK = "BANK";
 	public final static String COLUMN_INVENTORY = "INVENTORY";
 	public final static String COLUMN_INCOME = "INCOME";
-	public final static String COLUMN_UID_TYPE = "BIGINT";
+	public final static String COLUMN_UID_TYPE = "TEXT";
 	public final static String COLUMN_BANK_TYPE = "BIGINT";
 	public final static String COLUMN_INVENTORY_TYPE = "BIGINT";
 	public final static String COLUMN_INCOME_TYPE = "BIGINT";
@@ -54,7 +54,7 @@ public class Player extends DataObject {
 		super.set(object, columnName);
 		switch (columnName) {
 		case COLUMN_UID:
-			uid = (Long) object;
+			uid = (String) object;
 			break;
 		case COLUMN_BANK:
 			bank = (Long) object;
