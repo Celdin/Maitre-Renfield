@@ -27,7 +27,8 @@ public class PlayerQuery extends Query<Player> {
 			System.out.println(query);
 			ResultSet result = statement.executeQuery(query);
 			try {
-				player = result.getObject(0, Player.class);
+				if(result.next())
+					player = result.getObject(0, Player.class);
 			} catch (Exception e) {
 				log.error("error getting player : ", e);
 			}
