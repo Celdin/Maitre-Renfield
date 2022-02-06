@@ -26,7 +26,7 @@ public class PlayerQuery extends Query<Player> {
 			Statement statement = connection.createStatement();
 			System.out.println(query);
 			ResultSet result = statement.executeQuery(query);
-			if(result.next())
+			if(result.getFetchSize() > 0)
 				player = result.getObject(0, Player.class);
 			statement.close();
 			result.close();
