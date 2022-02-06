@@ -1,11 +1,10 @@
 package com.sylvain.jdr.action;
 
-import com.sylvain.jdr.action.impl.ReplyAction;
 import lombok.AllArgsConstructor;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
@@ -13,7 +12,9 @@ import java.awt.*;
 
 @AllArgsConstructor
 public abstract class Action {
-	protected final static String MESSAGE_KO_ADMIN = "Seul les maîtres du jeu peuvent utiliser cette commande.";
+
+	protected final static String MESSAGE_KO_ADMIN = "Seul les joueurs aillant le role [%s] peuvent utiliser cette commande.";
+	public static final String ADMIN = "937372694264021062";
 
 	protected GenericCommandInteractionEvent event;
 	public abstract void apply();
@@ -49,7 +50,7 @@ public abstract class Action {
 	protected boolean isAdmin() {
 		final Member member = event.getMember();
 		if(member != null) {
-			return member.getRoles().stream().anyMatch(role -> "937372694264021062".equals(role.getId()));
+			return member.getRoles().stream().anyMatch(role -> ADMIN.equals(role.getId()));
 		}
 		return false;
 	}
@@ -59,7 +60,8 @@ public abstract class Action {
 			return true;
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		embedBuilder.setColor(Color.RED);
-		embedBuilder.setTitle(MESSAGE_KO_ADMIN);
+		Role roleById = event.getJDA().getRoleById(ADMIN);
+		embedBuilder.setTitle(String.format(MESSAGE_KO_ADMIN, roleById));
 		event.replyEmbeds(embedBuilder.build()).queue();
 		return false;
 	}
