@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PlayerQuery extends Query<Player> {
 
@@ -23,7 +24,7 @@ public class PlayerQuery extends Query<Player> {
 
 	@Override
 	public List<Player> getAll() throws SQLException {
-		return Arrays.asList("112263806700224512", "129568273057447937", "581199373703184384", "337275100120219650", "311140476256256000", "532819372851462156").stream().map(this::getById).collect(
+		return Stream.of("112263806700224512", "129568273057447937", "581199373703184384", "532819372851462156").map(this::getById).collect(
 				Collectors.toList());
 	}
 }

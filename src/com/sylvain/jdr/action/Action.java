@@ -12,7 +12,10 @@ public abstract class Action {
 	public abstract boolean validate();
 
 	protected String getName(String id) {
-		final User userById = event.getJDA().retrieveUserById(id).complete();
+		User userById;
+		userById = event.getJDA().getUserById(id);
+		if(userById == null)
+			userById = event.getJDA().retrieveUserById(id).complete();
 		if(userById!= null)
 			return getName(userById);
 		return id;
@@ -22,7 +25,10 @@ public abstract class Action {
 		String name = user.getName();
 		final Guild guild = event.getGuild();
 		if (guild!=null) {
-			final Member member = guild.getMember(user);
+			Member member;
+			member = guild.getMember(user);
+			if(member == null)
+				member = guild.retrieveMember(user).complete();
 			if(member != null) {
 				final String nickname = member.getNickname();
 				if (nickname != null) {
