@@ -18,6 +18,8 @@ public class Player extends DataObject {
 	String channel;
 
 
+	public final static String TABLE_NAME = "PLAYER";
+
 	public final static String COLUMN_UID = "UID";
 	public final static String COLUMN_CHANNEL = "CHANNEL";
 	public final static String COLUMN_BANK = "BANK";
@@ -34,7 +36,7 @@ public class Player extends DataObject {
 
 	@Override
 	public String getTableName() {
-		return "PLAYER";
+		return TABLE_NAME;
 	}
 
 	@Override

@@ -26,6 +26,7 @@ public class LinkAction extends Action {
 		if(!validate())
 			return;
 		player.setChannel(channel.getId());
+		playerQuery.save(player);
 		ReplyAction.builder()
 				.event(event)
 				.message(String.format("Joueur %s sur cannal %s", getName(destinataire), channel.getName()))

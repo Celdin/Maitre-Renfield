@@ -1,6 +1,9 @@
 package com.sylvain.jdr.query;
 
-import static java.lang.String.format;
+import com.sylvain.jdr.data.dto.DataObject;
+import com.sylvain.jdr.driver.PostgreSQLDriver;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,10 +14,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-import com.sylvain.jdr.data.dto.DataObject;
-import com.sylvain.jdr.driver.PostgreSQLDriver;
-import lombok.Setter;
+import static java.lang.String.format;
 
+@Slf4j
 public abstract class Query<T extends DataObject> {
 
 	private static final int MAX_IN_CLAUSE = 1000;
@@ -49,6 +51,15 @@ public abstract class Query<T extends DataObject> {
 		return dataObjects;
 	}
 
+	public void save(DataObject dataObject) {
+		try {
+			if (dataObject.getId() != null) update(dataObject);
+			else insert(dataObject);
+		} catch (SQLException e) {
+			log.error("Can't save " + dataObject + ":", e);
+		}
+	}
+
 	protected static void insert(DataObject dataObject) throws SQLException {
 		List<String> columnNames = new ArrayList<>(dataObject.getColumnNames());
 		columnNames.remove(DataObject.COLUMN_ID);
@@ -69,11 +80,6 @@ public abstract class Query<T extends DataObject> {
 		}
 		values = String.join(", ", valueList);
 		query = String.format(query, dataObject.getTableName(), values);
-		Connection connection = PostgreSQLDriver.getConnection();
-		Statement statement = connection.createStatement();
-		System.out.println(query);
-		statement.executeUpdate(query);
-		statement.close();
 	}
 
 	protected static void update(DataObject dataObject) throws SQLException {

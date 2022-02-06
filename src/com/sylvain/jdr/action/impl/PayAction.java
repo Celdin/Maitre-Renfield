@@ -54,6 +54,7 @@ public class PayAction extends Action {
 			textChannelById.sendMessageEmbeds(embedBuilder.build()).queue();
 		}
 
+		playerQuery.save(source);
 		String format = String.format(MESSAGE_OK, montant, compte);
 		format = motif!=null?format + " (" + motif + ").":format + ".";
 		ReplyAction.builder()

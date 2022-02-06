@@ -36,6 +36,8 @@ public class StealAction extends Action {
 			return;
 		source.setInventory(source.getInventory() + montant );
 		cible.setInventory(cible.getInventory() - montant );
+		playerQuery.save(source);
+		playerQuery.save(cible);
 		MpAction.builder()
 				.event(event)
 				.destinataire(destinataire)

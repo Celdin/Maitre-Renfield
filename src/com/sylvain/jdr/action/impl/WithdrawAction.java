@@ -27,6 +27,7 @@ public class WithdrawAction extends Action {
 			return;
 		source.setBank(source.getBank() - montant);
 		source.setInventory(source.getInventory() + montant);
+		playerQuery.save(source);
 		ReplyAction.builder()
 				.event(event)
 				.message(String.format(MESSAGE_OK, montant))

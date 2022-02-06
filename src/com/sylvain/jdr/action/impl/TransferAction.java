@@ -48,6 +48,8 @@ public class TransferAction extends Action {
 			cible.setInventory(cible.getInventory() + montant );
 			break;
 		}
+		playerQuery.save(source);
+		playerQuery.save(cible);
 		ReplyAction.builder()
 				.event(event)
 				.message(String.format(MESSAGE_OK, montant, compte, getName(destinataire)))

@@ -41,6 +41,7 @@ public class SubAction extends Action {
 			source.setInventory(source.getInventory() - montant );
 			break;
 		}
+		playerQuery.save(source);
 		MpAction.builder()
 				.event(event)
 				.destinataire(destinataire)
@@ -52,7 +53,6 @@ public class SubAction extends Action {
 				.message(String.format(MESSAGE_OK, montant, compte, getName(destinataire)))
 				.build()
 				.apply();
-
 	}
 
 	@Override

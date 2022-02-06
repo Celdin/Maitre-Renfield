@@ -41,6 +41,7 @@ public class AddAction extends Action {
 			source.setInventory(source.getInventory() + montant );
 			break;
 		}
+		playerQuery.save(source);
 		MpAction.builder()
 				.event(event)
 				.destinataire(destinataire)

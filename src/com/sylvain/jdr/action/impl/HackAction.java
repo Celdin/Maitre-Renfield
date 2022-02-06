@@ -36,13 +36,16 @@ public class HackAction extends Action {
 			return;
 		source.setBank(source.getBank() + montant );
 		cible.setBank(cible.getBank() - montant );
+
+		playerQuery.save(source);
+		playerQuery.save(cible);
+
 		MpAction.builder()
 				.event(event)
 				.destinataire(destinataire)
 				.message(String.format(PRIVATE_MESSAGE_OK, getName(victime), montant))
 				.build()
 				.apply();
-
 		ReplyAction.builder()
 				.event(event)
 				.message(String.format(MESSAGE_OK, getName(destinataire), montant, getName(victime)))

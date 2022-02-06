@@ -26,8 +26,8 @@ public class MaitreRenfield {
 		JDA jda = JDABuilder.createLight(System.getenv("DISCORD_TOKEN"), EnumSet.noneOf(GatewayIntent.class)) // slash commands don't need any intents
 			.addEventListeners(new SlashCommandListener())
 			.build();
-//		PostgreSQLDriver.initialise(null, null, null);
-//		PostgreSQLDriver.ckeckDatabase();
+		PostgreSQLDriver.initialise(null, null, null);
+		PostgreSQLDriver.ckeckDatabase();
 		PlayerQuery playerQuery = new PlayerQuery();
 		EventScheduler.update(playerQuery.getAll());
 		jda.updateCommands()

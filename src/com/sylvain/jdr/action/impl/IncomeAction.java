@@ -40,6 +40,7 @@ public class IncomeAction extends Action {
 			source.setIncomeInv(montant);
 			break;
 		}
+		playerQuery.save(source);
 		ReplyAction.builder()
 				.event(event)
 				.message(String.format(MESSAGE_OK, getName(destinataire), montant))
