@@ -34,7 +34,7 @@ public class CheckAction extends Action {
 	public MessageEmbed getEmbedBuilder(Player player) {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		embedBuilder.setTitle(String.format(TITRE, getName(player.getUid())));
-		embedBuilder.setImage(getProfilePicture(player));
+		embedBuilder.setThumbnail(getProfilePicture(player));
 		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), player.getBank() + "€", false);
 		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), player.getInventory() + "€", false);
 		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", false);
