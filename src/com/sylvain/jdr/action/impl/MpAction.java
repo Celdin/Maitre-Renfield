@@ -25,9 +25,10 @@ public class MpAction extends Action {
 
 		PlayerQuery playerQuery = new PlayerQuery();
 		final Player player = playerQuery.getById(destinataire.getId());
-		final TextChannel textChannelById = event.getJDA().getTextChannelById(player.getChannel());
-		if (textChannelById != null)
-			textChannelById.sendMessage(message).queue();
+		if(player.getChannel() != null) {
+			final TextChannel textChannelById = event.getJDA().getTextChannelById(player.getChannel());
+			if (textChannelById != null) textChannelById.sendMessage(message).queue();
+		}
 	}
 
 	@Override
