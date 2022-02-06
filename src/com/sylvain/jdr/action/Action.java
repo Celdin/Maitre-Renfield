@@ -1,5 +1,6 @@
 package com.sylvain.jdr.action;
 
+import com.sylvain.jdr.data.dto.impl.Player;
 import lombok.AllArgsConstructor;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -64,5 +65,16 @@ public abstract class Action {
 		embedBuilder.setTitle(String.format(MESSAGE_KO_ADMIN, roleById.getName()));
 		event.replyEmbeds(embedBuilder.build()).queue();
 		return false;
+	}
+
+	protected String getProfilePicture(Player player) {
+		User user = event.getJDA().getUserById(player.getUid());
+		if(user == null) {
+			user = event.getJDA().retrieveUserById(player.getUid()).complete();
+		}
+		String avatarUrl = user.getAvatarUrl();
+		if(avatarUrl == null)
+			avatarUrl = user.getDefaultAvatarUrl();
+		return avatarUrl;
 	}
 }

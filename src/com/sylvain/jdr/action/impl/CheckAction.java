@@ -47,17 +47,6 @@ public class CheckAction extends Action {
 		return embedBuilder.build();
 	}
 
-	private String getProfilePicture(Player player) {
-		User user = event.getJDA().getUserById(player.getUid());
-		if(user == null) {
-			user = event.getJDA().retrieveUserById(player.getUid()).complete();
-		}
-		String avatarUrl = user.getAvatarUrl();
-		if(avatarUrl == null)
-			avatarUrl = user.getDefaultAvatarUrl();
-		return avatarUrl;
-	}
-
 	@Override
 	public boolean validate() {
 		return true;

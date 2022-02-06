@@ -5,10 +5,13 @@ import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.dto.impl.Player;
 import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
 public class PayAction extends Action {
 	private final static String MESSAGE_OK = "Vous payez %s€[%s]";
+	private final static String MESSAGE_NOTIF = "%s a payé %s€[%s]";
 	private final static String MESSAGE_MONTANT_NEG = "Indiquer un montant suppérieur à zero.";
 	private final static String MESSAGE_ISSUFISANT_BANQUE = "Vous avez pas suffisament de fond sur votre compte en baque.";
 	private final static String MESSAGE_ISSUFISANT_INV = "Vous avez pas suffisament de fond dans votre inventaire.";
@@ -42,6 +45,15 @@ public class PayAction extends Action {
 			source.setInventory(source.getInventory() - montant );
 			break;
 		}
+		EmbedBuilder embedBuilder = new EmbedBuilder();
+		embedBuilder.setTitle(String.format(MESSAGE_NOTIF, getName(event.getUser()), montant, compte));
+		embedBuilder.setDescription(motif);
+		embedBuilder.setThumbnail(getProfilePicture(source));
+		TextChannel textChannelById = event.getJDA().getTextChannelById("938779944547389491");
+		if (textChannelById != null) {
+			textChannelById.sendMessageEmbeds(embedBuilder.build()).queue();
+		}
+
 		String format = String.format(MESSAGE_OK, montant, compte);
 		format = motif!=null?format + " (" + motif + ").":format + ".";
 		ReplyAction.builder()
