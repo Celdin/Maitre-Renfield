@@ -30,7 +30,7 @@ public class SubAction extends Action {
 	@Override
 	public void apply() {
 		PlayerQuery playerQuery = new PlayerQuery();
-		source = playerQuery.getById(event.getUser().getId());
+		source = playerQuery.getById(destinataire.getId());
 		if(!validate())
 			return;
 		switch (compte) {
