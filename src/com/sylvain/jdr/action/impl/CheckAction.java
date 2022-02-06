@@ -37,8 +37,8 @@ public class CheckAction extends Action {
 		embedBuilder.setThumbnail(getProfilePicture(player));
 		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), player.getBank() + "€", false);
 		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), player.getInventory() + "€", false);
-		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", false);
-		final MessageEmbed.Field incomeInvFIeld = new MessageEmbed.Field("Revenus[" + Comptes.INVENTAIRE.name() + "]", player.getIncomeInv() + "€/mois", false);
+		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus [" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", false);
+		final MessageEmbed.Field incomeInvFIeld = new MessageEmbed.Field("Revenus [" + Comptes.INVENTAIRE.name() + "]", player.getIncomeInv() + "€/mois", false);
 
 		embedBuilder.addField(inventaireField);
 		embedBuilder.addField(banqueField);
