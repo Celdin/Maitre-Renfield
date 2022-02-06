@@ -4,6 +4,8 @@ import com.sylvain.jdr.data.Comptes;
 import com.sylvain.jdr.data.SlashCommand;
 import com.sylvain.jdr.driver.PostgreSQLDriver;
 import com.sylvain.jdr.listener.SlashCommandListener;
+import com.sylvain.jdr.query.impl.PlayerQuery;
+import com.sylvain.jdr.scheduler.EventScheduler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -26,6 +28,8 @@ public class MaitreRenfield {
 			.build();
 //		PostgreSQLDriver.initialise(null, null, null);
 //		PostgreSQLDriver.ckeckDatabase();
+		PlayerQuery playerQuery = new PlayerQuery();
+		EventScheduler.update(playerQuery.getAll());
 		jda.updateCommands()
 				.addCommands(Commands.slash(SlashCommand.TRANSFER.getName(), "Transfère de l'argent à un autre joueur.")
 						.addOptions(new OptionData(OptionType.STRING, "compte", "Compte à utiliser")
