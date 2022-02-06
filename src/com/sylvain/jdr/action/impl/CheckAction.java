@@ -52,7 +52,10 @@ public class CheckAction extends Action {
 		if(user == null) {
 			user = event.getJDA().retrieveUserById(player.getUid()).complete();
 		}
-		return user.getAvatarUrl();
+		String avatarUrl = user.getAvatarUrl();
+		if(avatarUrl == null)
+			avatarUrl = user.getDefaultAvatarUrl();
+		return avatarUrl;
 	}
 
 	@Override
