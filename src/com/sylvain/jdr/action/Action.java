@@ -61,7 +61,7 @@ public abstract class Action {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		embedBuilder.setColor(Color.RED);
 		Role roleById = event.getJDA().getRoleById(ADMIN);
-		embedBuilder.setTitle(String.format(MESSAGE_KO_ADMIN, roleById));
+		embedBuilder.setTitle(String.format(MESSAGE_KO_ADMIN, roleById.getName()));
 		event.replyEmbeds(embedBuilder.build()).queue();
 		return false;
 	}
