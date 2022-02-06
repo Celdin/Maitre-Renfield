@@ -84,6 +84,8 @@ public abstract class Query<T extends DataObject> {
 		System.out.println(query);
 		statement.executeUpdate(query);
 		statement.close();
+		connection.commit();
+		connection.close();
 	}
 
 	protected static void update(DataObject dataObject) throws SQLException {
@@ -108,6 +110,8 @@ public abstract class Query<T extends DataObject> {
 		System.out.println(query);
 		statement.executeUpdate(query);
 		statement.close();
+		connection.commit();
+		connection.close();
 	}
 
 	protected static void delete(DataObject dataObject) throws SQLException {
