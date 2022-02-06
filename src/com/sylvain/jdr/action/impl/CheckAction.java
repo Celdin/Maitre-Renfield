@@ -7,6 +7,7 @@ import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +34,7 @@ public class CheckAction extends Action {
 	public MessageEmbed getEmbedBuilder(Player player) {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		embedBuilder.setTitle(String.format(TITRE, getName(player.getUid())));
+		embedBuilder.setImage(getProfilePicture(player));
 		final MessageEmbed.Field banqueField = new MessageEmbed.Field(Comptes.BANQUE.name(), player.getBank() + "€", false);
 		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(Comptes.INVENTAIRE.name(), player.getInventory() + "€", false);
 		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field("Revenus[" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", false);
@@ -43,6 +45,14 @@ public class CheckAction extends Action {
 		embedBuilder.addField(incomeBnkFIeld);
 		embedBuilder.addField(incomeInvFIeld);
 		return embedBuilder.build();
+	}
+
+	private String getProfilePicture(Player player) {
+		User user = event.getJDA().getUserById(player.getUid());
+		if(user == null) {
+			user = event.getJDA().retrieveUserById(player.getUid()).complete();
+		}
+		return user.getAvatarUrl();
 	}
 
 	@Override
