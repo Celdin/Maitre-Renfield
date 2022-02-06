@@ -26,13 +26,12 @@ public class EventScheduler {
 
 	public static void schdule(Player player, ScheduledExecutorService executor) {
 		Calendar nextMonth = Calendar.getInstance();
-//		nextMonth.add(Calendar.MONTH, 1);
-//		nextMonth.set(Calendar.DAY_OF_MONTH, 1);
-//		nextMonth.set(Calendar.HOUR_OF_DAY, 0);
-//		nextMonth.set(Calendar.MINUTE, 0);
-//		nextMonth.set(Calendar.SECOND, 0);
-//		nextMonth.set(Calendar.MILLISECOND, 0);
-		nextMonth.add(Calendar.SECOND, 30);
+		nextMonth.set(Calendar.DAY_OF_MONTH, 1);
+		nextMonth.set(Calendar.HOUR_OF_DAY, 0);
+		nextMonth.set(Calendar.MINUTE, 0);
+		nextMonth.set(Calendar.SECOND, 0);
+		nextMonth.set(Calendar.MILLISECOND, 0);
+		nextMonth.add(Calendar.MONTH, 1);
 		long initialDelay = nextMonth.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
 		executor.schedule(new EventRunnable(player, executor), initialDelay, TimeUnit.MILLISECONDS);
 	}
