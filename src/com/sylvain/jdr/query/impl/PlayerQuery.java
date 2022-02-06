@@ -13,6 +13,11 @@ import java.sql.Statement;
 @Slf4j
 public class PlayerQuery extends Query<Player> {
 
+	public PlayerQuery() {
+		super();
+		setSupplier(() -> new Player());
+	}
+
 	public Player getById(String id) {
 		Player player = null;
 		try {
@@ -21,7 +26,8 @@ public class PlayerQuery extends Query<Player> {
 			Statement statement = connection.createStatement();
 			System.out.println(query);
 			ResultSet result = statement.executeQuery(query);
-			player = result.getObject(0, Player.class);
+			if(result.next())
+				player = result.getObject(0, Player.class);
 			statement.close();
 			result.close();
 		}catch (SQLException e) {

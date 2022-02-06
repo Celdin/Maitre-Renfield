@@ -28,8 +28,6 @@ public abstract class Query<T extends DataObject> {
 		super();
 	}
 
-	;
-
 	public List<T> getAll() throws SQLException {
 		List<T> dataObjects = new ArrayList<>();
 		String query = "SELECT * " + "FROM " + "	%s " + ";";
