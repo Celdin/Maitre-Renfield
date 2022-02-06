@@ -9,8 +9,8 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
 public class AddAction extends Action {
-	private final static String MESSAGE_OK = "Vous donnez %s€[%s] à %s.";
-	private final static String PRIVATE_MESSAGE_OK = "Vous gagnez %s€[%s].";
+	private final static String MESSAGE_OK = "Vous donnez %s€ [%s] à %s.";
+	private final static String PRIVATE_MESSAGE_OK = "Vous gagnez %s€ [%s].";
 	private final static String MESSAGE_MONTANT_NEG = "Indiquer un montant suppérieur à zero.";
 
 	Comptes compte = null;

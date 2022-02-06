@@ -10,8 +10,8 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
 public class PayAction extends Action {
-	private final static String MESSAGE_OK = "Vous payez %s€[%s]";
-	private final static String MESSAGE_NOTIF = "%s a payé %s€[%s]";
+	private final static String MESSAGE_OK = "Vous payez %s€ [%s]";
+	private final static String MESSAGE_NOTIF = "%s a payé %s€ [%s]";
 	private final static String MESSAGE_MONTANT_NEG = "Indiquer un montant suppérieur à zero.";
 	private final static String MESSAGE_ISSUFISANT_BANQUE = "Vous avez pas suffisament de fond sur votre compte en baque.";
 	private final static String MESSAGE_ISSUFISANT_INV = "Vous avez pas suffisament de fond dans votre inventaire.";
