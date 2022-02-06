@@ -37,8 +37,10 @@ public class PlayerQuery extends Query<Player> {
 		}catch (SQLException e) {
 			log.error("Can't retrieve Player " + id + ": ", e);
 		}
-		if(player != null)
+		if(player != null) {
+			log.debug(player.toString());
 			return player;
+		}
 		player = new Player();
 		player.setBank(0L);
 		player.setInventory(0L);
