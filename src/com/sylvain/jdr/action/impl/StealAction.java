@@ -65,7 +65,7 @@ public class StealAction extends Action {
 					.apply();
 			return false;
 		}
-		if(source.getInventory() - montant < 0) {
+		if(cible.getInventory() - montant < 0) {
 			ReplyAction.builder().event(event).message(String.format(MESSAGE_ISSUFISANT_INV, getName(victime))).build().apply();
 			return false;
 		}

@@ -66,7 +66,7 @@ public class HackAction extends Action {
 					.apply();
 			return false;
 		}
-		if(source.getBank() - montant < 0) {
+		if(cible.getBank() - montant < 0) {
 			ReplyAction.builder().event(event).message(String.format(MESSAGE_ISSUFISANT_BANQUE, getName(victime))).build().apply();
 			return false;
 		}
