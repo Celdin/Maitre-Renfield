@@ -4,6 +4,8 @@ import com.sylvain.jdr.action.Action;
 import com.sylvain.jdr.data.dto.impl.Player;
 import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
@@ -40,6 +42,13 @@ public class HackAction extends Action {
 		playerQuery.save(source);
 		playerQuery.save(cible);
 
+		EmbedBuilder embedBuilder = new EmbedBuilder();
+		embedBuilder.setTitle(String.format(MESSAGE_OK, getName(destinataire), montant, getName(victime)));
+		embedBuilder.setThumbnail(getProfilePicture(source));
+		TextChannel textChannelById = event.getJDA().getTextChannelById("938779944547389491");
+		if (textChannelById != null) {
+			textChannelById.sendMessageEmbeds(embedBuilder.build()).queue();
+		}
 		MpAction.builder()
 				.event(event)
 				.destinataire(destinataire)

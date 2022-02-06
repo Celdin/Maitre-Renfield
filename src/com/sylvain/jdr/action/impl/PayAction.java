@@ -45,6 +45,7 @@ public class PayAction extends Action {
 			source.setInventory(source.getInventory() - montant );
 			break;
 		}
+		playerQuery.save(source);
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		embedBuilder.setTitle(String.format(MESSAGE_NOTIF, getName(event.getUser()), montant, compte));
 		embedBuilder.setDescription(motif);
@@ -54,7 +55,6 @@ public class PayAction extends Action {
 			textChannelById.sendMessageEmbeds(embedBuilder.build()).queue();
 		}
 
-		playerQuery.save(source);
 		String format = String.format(MESSAGE_OK, montant, compte);
 		format = motif!=null?format + " (" + motif + ").":format + ".";
 		ReplyAction.builder()
