@@ -50,6 +50,7 @@ public abstract class Query<T extends DataObject> {
 	}
 
 	public void save(DataObject dataObject) {
+
 		try {
 			if (dataObject.getId() != null) update(dataObject);
 			else insert(dataObject);
@@ -78,6 +79,11 @@ public abstract class Query<T extends DataObject> {
 		}
 		values = String.join(", ", valueList);
 		query = String.format(query, dataObject.getTableName(), values);
+		Connection connection = PostgreSQLDriver.getConnection();
+		Statement statement = connection.createStatement();
+		System.out.println(query);
+		statement.executeUpdate(query);
+		statement.close();
 	}
 
 	protected static void update(DataObject dataObject) throws SQLException {
