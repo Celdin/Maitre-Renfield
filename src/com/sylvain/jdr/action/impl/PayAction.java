@@ -9,6 +9,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
+import java.awt.*;
+
 public class PayAction extends Action {
 	private final static String MESSAGE_OK = "Vous payez %s€ [%s]";
 	private final static String MESSAGE_NOTIF = "%s a payé %s€ [%s]";
@@ -50,6 +52,7 @@ public class PayAction extends Action {
 		embedBuilder.setTitle(String.format(MESSAGE_NOTIF, getName(event.getUser()), montant, compte));
 		embedBuilder.setDescription(motif);
 		embedBuilder.setThumbnail(getProfilePicture(source));
+		embedBuilder.setColor(Color.BLUE);
 		TextChannel textChannelById = event.getJDA().getTextChannelById("938779944547389491");
 		if (textChannelById != null) {
 			textChannelById.sendMessageEmbeds(embedBuilder.build()).queue();

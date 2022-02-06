@@ -9,9 +9,11 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 
+import java.awt.*;
+
 public class HackAction extends Action {
-	private final static String MESSAGE_OK = "%s à hacker %s€ à %s";
-	private final static String PRIVATE_MESSAGE_OK = "Vous avez réussi à hacker à %s %d€";
+	private final static String MESSAGE_OK = "%s à hacké %s€ à %s.";
+	private final static String PRIVATE_MESSAGE_OK = "Vous avez réussi à hacker à %s %d€.";
 	private final static String MESSAGE_MONTANT_NEG = "Indiquer un montant suppérieur à zero.";
 	private final static String MESSAGE_ISSUFISANT_BANQUE = "%s n'a pas suffisament de fond sur son compte en banque.";
 	User destinataire = null;
@@ -45,6 +47,7 @@ public class HackAction extends Action {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		embedBuilder.setTitle(String.format(MESSAGE_OK, getName(destinataire), montant, getName(victime)));
 		embedBuilder.setThumbnail(getProfilePicture(source));
+		embedBuilder.setColor(Color.RED);
 		TextChannel textChannelById = event.getJDA().getTextChannelById("938779944547389491");
 		if (textChannelById != null) {
 			textChannelById.sendMessageEmbeds(embedBuilder.build()).queue();
