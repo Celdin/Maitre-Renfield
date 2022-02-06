@@ -23,6 +23,8 @@ public class AdminCheckAction extends Action {
 	@Override
 	public void apply() {
 		PlayerQuery playerQuery = new PlayerQuery();
+		if(!validate())
+			return;
 		try {
 			final List<Player> all = playerQuery.getAll();
 			event.replyEmbeds(all.stream().map(player -> CheckAction.builder().event(event).build().getEmbedBuilder(player)).collect(Collectors.toList())).queue();
@@ -33,6 +35,9 @@ public class AdminCheckAction extends Action {
 
 	@Override
 	public boolean validate() {
+		if (!adminCheck()) {
+			return false;
+		}
 		return true;
 	}
 

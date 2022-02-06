@@ -42,8 +42,8 @@ public class CheckAction extends Action {
 
 		embedBuilder.addField(inventaireField);
 		embedBuilder.addField(banqueField);
-		embedBuilder.addField(incomeBnkFIeld);
 		embedBuilder.addField(incomeInvFIeld);
+		embedBuilder.addField(incomeBnkFIeld);
 		return embedBuilder.build();
 	}
 

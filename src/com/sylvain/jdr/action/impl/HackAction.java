@@ -52,6 +52,9 @@ public class HackAction extends Action {
 
 	@Override
 	public boolean validate() {
+		if (!adminCheck()) {
+			return false;
+		}
 		if (montant <= 0) {
 			ReplyAction.builder()
 					.event(event)

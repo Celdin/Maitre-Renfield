@@ -23,6 +23,8 @@ public class LinkAction extends Action {
 	public void apply() {
 		PlayerQuery playerQuery = new PlayerQuery();
 		final Player player = playerQuery.getById(destinataire.getId());
+		if(!validate())
+			return;
 		player.setChannel(channel.getId());
 		ReplyAction.builder()
 				.event(event)
@@ -33,6 +35,6 @@ public class LinkAction extends Action {
 
 	@Override
 	public boolean validate() {
-		return true;
+		return adminCheck();
 	}
 }

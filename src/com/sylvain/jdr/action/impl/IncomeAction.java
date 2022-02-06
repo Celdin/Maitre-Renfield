@@ -30,6 +30,8 @@ public class IncomeAction extends Action {
 		source = playerQuery.getById(event.getUser().getId());
 		if(!validate())
 			return;
+		if(!validate())
+			return;
 		switch (comptes) {
 		case BANQUE:
 			source.setIncomeBank(montant);
@@ -47,6 +49,9 @@ public class IncomeAction extends Action {
 
 	@Override
 	public boolean validate() {
+		if (!adminCheck()) {
+			return false;
+		}
 		return true;
 	}
 }
