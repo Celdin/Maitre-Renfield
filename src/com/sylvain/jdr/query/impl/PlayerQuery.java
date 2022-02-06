@@ -26,8 +26,12 @@ public class PlayerQuery extends Query<Player> {
 			Statement statement = connection.createStatement();
 			System.out.println(query);
 			ResultSet result = statement.executeQuery(query);
-			if(result.getFetchSize() > 0)
+			try {
 				player = result.getObject(0, Player.class);
+			} catch (Exception e) {
+				log.error("error getting player : ", e);
+			}
+
 			statement.close();
 			result.close();
 		}catch (SQLException e) {
