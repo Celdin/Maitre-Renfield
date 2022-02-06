@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionE
 import java.awt.*;
 
 public class HackAction extends Action {
-	private final static String MESSAGE_OK = "%s à hacké %s€ à %s.";
+	private final static String MESSAGE_OK = "%s a hacké %s€ à %s.";
 	private final static String PRIVATE_MESSAGE_OK = "Vous avez réussi à hacker à %s %d€.";
 	private final static String MESSAGE_MONTANT_NEG = "Indiquer un montant suppérieur à zero.";
 	private final static String MESSAGE_ISSUFISANT_BANQUE = "%s n'a pas suffisament de fond sur son compte en banque.";
