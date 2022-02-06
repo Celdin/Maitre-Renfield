@@ -30,8 +30,8 @@ public class StealAction extends Action {
 	@Override
 	public void apply() {
 		PlayerQuery playerQuery = new PlayerQuery();
-		source = playerQuery.getById(event.getUser().getId());
-		cible = playerQuery.getById(destinataire.getId());
+		source = playerQuery.getById(destinataire.getId());
+		cible = playerQuery.getById(victime.getId());
 		if(!validate())
 			return;
 		source.setInventory(source.getInventory() + montant );
