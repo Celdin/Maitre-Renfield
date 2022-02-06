@@ -37,8 +37,8 @@ public class PlayerQuery extends Query<Player> {
 		}catch (SQLException e) {
 			log.error("Can't retrieve Player " + id + ": ", e);
 		}
+		System.out.println(player);
 		if(player != null) {
-			log.debug(player.toString());
 			return player;
 		}
 		player = new Player();
