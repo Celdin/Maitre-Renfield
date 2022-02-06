@@ -27,8 +27,12 @@ public class PlayerQuery extends Query<Player> {
 			System.out.println(query);
 			ResultSet result = statement.executeQuery(query);
 			try {
-				if(result.next())
-					player = result.getObject(0, Player.class);
+				if(result.next()) {
+					player = new Player();
+					for (String column : player.getColumnNames()) {
+						player.set(result.getObject(column), column);
+					}
+				}
 			} catch (Exception e) {
 				log.error("error getting player : ", e);
 			}
