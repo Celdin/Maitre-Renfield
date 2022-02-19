@@ -26,6 +26,7 @@ public class AdminCheckAction extends Action {
 		PlayerQuery playerQuery = new PlayerQuery();
 		if(!validate())
 			return;
+		event.deferReply().queue();
 		try {
 			final List<Player> all = playerQuery.getAll();
 			final List<MessageEmbed> messageEmbeds = all.parallelStream().map(player -> CheckAction.builder().event(event).build().getEmbedBuilder(player)).collect(Collectors.toList());
