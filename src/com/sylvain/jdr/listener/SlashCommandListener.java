@@ -37,7 +37,7 @@ public class SlashCommandListener extends ListenerAdapter {
 			motif = motifOptionMapping.getAsString();
 		if(channelOptionMapping != null)
 			channel = channelOptionMapping.getAsMessageChannel();
-
+		System.out.println(" ** " + SlashCommand.findByName(event.getName()) + " ** ");
 		switch (SlashCommand.findByName(event.getName())) {
 		case TRANSFER:
 			TransferAction.builder()
