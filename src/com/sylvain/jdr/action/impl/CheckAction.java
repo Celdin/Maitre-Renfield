@@ -15,18 +15,29 @@ import java.util.List;
 
 public class CheckAction extends Action {
 	private final static String TITRE = "Fonds de %s";
+	User cible = null;
 
 	Player source;
 
 	@Builder
-	public CheckAction(GenericCommandInteractionEvent event) {
+	public CheckAction(GenericCommandInteractionEvent event, User cible) {
 		super(event);
+		this.cible = cible;
 	}
 
 	@Override
 	public void apply() {
 		PlayerQuery playerQuery = new PlayerQuery();
-		source = playerQuery.getById(event.getUser().getId());
+		if(cible != null) {
+			if(!cible.getId().equals(event.getUser().getId())) {
+				if(!adminCheck()) {
+					return;
+				}
+			}
+			source = playerQuery.getById(cible.getId());
+		} else {
+			source = playerQuery.getById(event.getUser().getId());
+		}
 		MessageEmbed embed = getEmbedBuilder(source);
 
 		event.replyEmbeds(embed).queue();

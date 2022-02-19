@@ -51,6 +51,7 @@ public class SlashCommandListener extends ListenerAdapter {
 		case CHECK:
 			CheckAction.builder()
 					.event(event)
+					.cible(cible)
 					.build()
 					.apply();
 			break;
