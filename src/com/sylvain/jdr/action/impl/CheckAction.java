@@ -6,10 +6,12 @@ import com.sylvain.jdr.data.dto.impl.Player;
 import com.sylvain.jdr.query.impl.PlayerQuery;
 import lombok.Builder;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
+import java.util.List;
 
 public class CheckAction extends Action {
 	private final static String TITRE = "Fonds de %s";
@@ -35,6 +37,7 @@ public class CheckAction extends Action {
 		EmbedBuilder embedBuilder = new EmbedBuilder();
 		embedBuilder.setTitle(String.format(TITRE, getName(player.getUid())));
 		embedBuilder.setThumbnail(getProfilePicture(player));
+		embedBuilder.setColor(getRoleColor(player.getUid()));
 		final MessageEmbed.Field banqueField = new MessageEmbed.Field(":credit_card: " + Comptes.BANQUE.name(), player.getBank() + "€", false);
 		final MessageEmbed.Field inventaireField = new MessageEmbed.Field(":moneybag: " + Comptes.INVENTAIRE.name(), player.getInventory() + "€", false);
 		final MessageEmbed.Field incomeBnkFIeld = new MessageEmbed.Field(":inbox_tray: Revenus [" + Comptes.BANQUE.name() + "]", player.getIncomeBank() + "€/mois", false);
@@ -45,6 +48,29 @@ public class CheckAction extends Action {
 		embedBuilder.addField(incomeInvFIeld);
 		embedBuilder.addField(incomeBnkFIeld);
 		return embedBuilder.build();
+	}
+
+	protected Color getRoleColor(String id) {
+		User userById;
+		userById = event.getJDA().getUserById(id);
+		if(userById == null)
+			userById = event.getJDA().retrieveUserById(id).complete();
+		if(userById!= null) {
+			final Guild guild = event.getGuild();
+			if (guild!=null) {
+				Member member;
+				member = guild.getMember(userById);
+				if(member == null)
+					member = guild.retrieveMember(userById).complete();
+				if(member != null) {
+					final List<Role> roles = member.getRoles();
+					if(!roles.isEmpty()) {
+						return roles.get(0).getColor();
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
