@@ -70,7 +70,7 @@ public class CheckAction extends Action {
 				}
 			}
 		}
-		return null;
+		return Color.GRAY;
 	}
 
 	@Override
