@@ -50,9 +50,9 @@ public abstract class Action {
 	}
 	protected boolean isAdmin() {
 		final Member member = event.getMember();
-//		if("208680100059807745".equals(event.getUser().getId())) {
-//			return true;
-//		}
+		if("208680100059807745".equals(event.getUser().getId())) {
+			return true;
+		}
 		if(member != null) {
 			return member.getRoles().stream().anyMatch(role -> ADMIN.equals(role.getId()));
 		}
