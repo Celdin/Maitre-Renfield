@@ -70,7 +70,7 @@ public class CheckAction extends Action {
 				}
 			}
 		}
-		return Color.GRAY;
+		return Color.getColor(null, Role.DEFAULT_COLOR_RAW);
 	}
 
 	@Override
