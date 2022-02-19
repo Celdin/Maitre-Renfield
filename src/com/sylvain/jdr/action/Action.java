@@ -14,7 +14,7 @@ import java.awt.*;
 @AllArgsConstructor
 public abstract class Action {
 
-	protected final static String MESSAGE_KO_ADMIN = "Seul les joueurs aillant le role [%s] peuvent utiliser cette commande.";
+	protected final static String MESSAGE_KO_ADMIN = "Seuls les joueurs ayant le rôle [%s] peuvent utiliser cette commande.";
 	public static final String ADMIN = "937372694264021062";
 
 	protected GenericCommandInteractionEvent event;
