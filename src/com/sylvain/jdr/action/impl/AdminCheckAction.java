@@ -30,7 +30,7 @@ public class AdminCheckAction extends Action {
 		try {
 			final List<Player> all = playerQuery.getAll();
 			final List<MessageEmbed> messageEmbeds = all.parallelStream().map(player -> CheckAction.builder().event(event).build().getEmbedBuilder(player)).collect(Collectors.toList());
-			event.replyEmbeds(messageEmbeds.stream().collect(Collectors.groupingBy(MessageEmbed::getColor)).values().stream().flatMap(List::stream).collect(Collectors.toList())).queue();
+			event.getHook().sendMessageEmbeds(messageEmbeds.stream().collect(Collectors.groupingBy(MessageEmbed::getColor)).values().stream().flatMap(List::stream).collect(Collectors.toList())).queue();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
