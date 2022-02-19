@@ -24,7 +24,6 @@ public class PlayerQuery extends Query<Player> {
 			String query = "SELECT * FROM " + Player.TABLE_NAME + " WHERE " + Player.COLUMN_UID + " = '" + id + "';";
 			Connection connection = PostgreSQLDriver.getConnection();
 			Statement statement = connection.createStatement();
-			System.out.println(query);
 			ResultSet result = statement.executeQuery(query);
 			try {
 				if(result.next()) {
@@ -42,7 +41,6 @@ public class PlayerQuery extends Query<Player> {
 		}catch (SQLException e) {
 			log.error("Can't retrieve Player " + id + ": ", e);
 		}
-		System.out.println(player);
 		if(player != null) {
 			return player;
 		}
