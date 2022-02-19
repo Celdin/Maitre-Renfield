@@ -29,7 +29,7 @@ public class LinkAction extends Action {
 		playerQuery.save(player);
 		ReplyAction.builder()
 				.event(event)
-				.message(String.format("Joueur %s sur cannal %s", getName(destinataire), channel.getName()))
+				.message(String.format("Joueur %s sur canal %s", getName(destinataire), channel.getName()))
 				.build()
 				.apply();
 	}
